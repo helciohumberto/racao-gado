@@ -7,7 +7,7 @@ const resp3 = document.querySelector("#res4")
 Swal.fire({
   icon: 'warning',
   title: 'Atenção!',
-  text: '"Quantidade Ração (Kg)", é a quantidade em que cada animal come.'
+  text: '"Quantidade Ração (Kg)", é a quantidade em que cada animal come.',
 })
 
 form.addEventListener("submit", (e) => {
@@ -23,8 +23,8 @@ form.addEventListener("submit", (e) => {
   const totalKgRacao = primeiraConta * qtDias 
 
   const custoDiv = (total / cabeca)
-  resp.innerText = `Ração Dia: ${primeiraConta.toFixed(3)}Kg `
-  resp3.innerText = `Total Ração: ${totalKgRacao.toFixed(3)}Kg`
+  resp.innerText = `Ração Dia: ${primeiraConta.toFixed(1)}Kg `
+  resp3.innerText = `Total Ração: ${totalKgRacao.toFixed(1)}Kg`
 
   resp1.innerText = `Preço Total da Ração = R$:${total.toFixed(2)} `
   resp2.innerText = `Gasto por Cabeça R$:${custoDiv.toFixed(2)}`
