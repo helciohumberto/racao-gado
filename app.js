@@ -4,6 +4,11 @@ const resp1 = document.querySelector("#res2")
 const resp2 = document.querySelector("#res3")
 const resp3 = document.querySelector("#res4")
 
+Swal.fire({
+  icon: 'warning',
+  title: 'Atenção!',
+  text: '"Quantidade Ração (Kg)", é a quantidade em que cada animal come.'
+})
 
 form.addEventListener("submit", (e) => {
   const cabeca = Number(form.inCabeca.value)
