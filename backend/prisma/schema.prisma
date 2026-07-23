@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  password String
+  role     String   @default("OWNER")
+  animais  Animal[]
+  lotes    Lote[]
+  createdAt DateTime @default(now())
+}
+
+model Lote {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  descricao String?
+  usuarioId Int
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id])
+  animais   Animal[]
+  createdAt DateTime @default(now())
+}
+
+model Animal {
+  id             Int        @id @default(autoincrement())
+  nome           String
+  raca           String?
+  sexo           String
+  dataNascimento DateTime?
+  pesoInicial    Float
+  estado         String     @default("ATIVO")
+  loteId         Int
+  lote           Lote       @relation(fields: [loteId], references: [id])
+  usuarioId      Int
+  usuario        Usuario    @relation(fields: [usuarioId], references: [id])
+  pesagens       Pesagem[]
+  createdAt      DateTime   @default(now())
+}
+
+model Pesagem {
+  id        Int      @id @default(autoincrement())
+  peso      Float
+  data      DateTime
+  animalId  Int
+  animal    Animal   @relation(fields: [animalId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Racao {
+  id            Int            @id @default(autoincrement())
+  nome          String
+  tipo          String
+  precoPorKg    Float
+  fornecimentos Fornecimento[]
+  createdAt     DateTime       @default(now())
+}
+
+model Fornecimento {
+  id         Int      @id @default(autoincrement())
+  quantidade Float
+  custo      Float
+  data       DateTime
+  loteId     Int
+  racaoId    Int
+  racao      Racao    @relation(fields: [racaoId], references: [id])
+  createdAt  DateTime @default(now())
+}
