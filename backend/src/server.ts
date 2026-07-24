@@ -3,7 +3,7 @@ import cors from "cors"
 import "dotenv/config"
 import animaisRoutes from "./routes/animaisRoutes"
 import pesagensRoutes from "./routes/pesagensRoutes"
-
+import custosRoutes from "./routes/custosRoutes"
 
 const app = express()
 
@@ -16,6 +16,7 @@ app.use((req, res, next) => {
 })
 app.use("/animais", animaisRoutes)
 app.use("/pesagens", pesagensRoutes)
+app.use("/custos", custosRoutes)
 
 app.get("/health", (req, res) => {
     res.json({ status: "ok" })
