@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard"
 import Animais from "./pages/Animais"
 import Relatorios from "./pages/Relatorios"
 import PrivateRoute from "./PrivateRoute"
+import NovoAnimal from "./pages/NovoAnimal"
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/animais" element={<Animais />} />
                     <Route path="/relatorios" element={<Relatorios />} />
+                    <Route path="/novoanimal" element={<NovoAnimal />} />
                 </Route>
                 <Route path="*" element={<Navigate to="/login" />} />
             </Routes>

@@ -8,6 +8,7 @@ import custosRoutes from "./routes/custosRoutes"
 import { autenticar } from "./middleware/auth"
 import swaggerJsdoc from "swagger-jsdoc"
 import swaggerUi from "swagger-ui-express"
+import lotesRoutes from "./routes/lotesRoutes"
 
 const swaggerOptions = {
     definition: {
@@ -48,6 +49,7 @@ app.use("/auth", authRoutes)
 app.use("/animais", autenticar, animaisRoutes)
 app.use("/pesagens", autenticar, pesagensRoutes)
 app.use("/custos", autenticar, custosRoutes)
+app.use("/lotes", autenticar, lotesRoutes)
 
 app.listen(3001, () => {
     console.log("racao-gado backend rodando na porta 3001")
