@@ -5,7 +5,7 @@ import Animais from "./pages/Animais"
 import Relatorios from "./pages/Relatorios"
 import PrivateRoute from "./PrivateRoute"
 import NovoAnimal from "./pages/NovoAnimal"
-
+import NovoLote from "./pages/NovoLote"
 function App() {
     return (
         <BrowserRouter>
@@ -16,6 +16,7 @@ function App() {
                     <Route path="/animais" element={<Animais />} />
                     <Route path="/relatorios" element={<Relatorios />} />
                     <Route path="/novoanimal" element={<NovoAnimal />} />
+                    <Route path="/novolote" element={<NovoLote />} />
                 </Route>
                 <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
