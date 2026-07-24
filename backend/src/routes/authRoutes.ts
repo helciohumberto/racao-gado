@@ -7,6 +7,30 @@ import "dotenv/config"
 const router = Router()
 const prisma = new PrismaClient()
 
+/**
+ * @openapi
+ * /auth/register:
+ *   post:
+ *     summary: Registar novo utilizador
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Utilizador criado
+ *       400:
+ *         description: Email já existe
+ */
+
 router.post("/register", async (req, res) => {
     try {
         const { email, password } = req.body
@@ -19,6 +43,30 @@ router.post("/register", async (req, res) => {
         res.status(400).json({ erro: "Email já existe" })
     }
 })
+
+/**
+ * @openapi
+ * /auth/login:
+ *   post:
+ *     summary: Login
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Token JWT
+ *       401:
+ *         description: Credenciais inválidas
+ */
 
 router.post("/login", async (req, res) => {
     try {
