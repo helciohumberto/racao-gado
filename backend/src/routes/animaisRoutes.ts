@@ -1,16 +1,14 @@
 import { Router } from "express"
 import { AnimalService } from "../services/AnimalService"
+import { AuthRequest } from "../middleware/auth"
 
 const router = Router()
 const animalService = new AnimalService()
 
-// Por agora usamos usuarioId fixo = 1 (depois adicionamos auth)
-const USUARIO_ID = 1
-
-router.get("/", async (req, res) => {
+router.get("/", async (req: AuthRequest, res) => {
     try {
         const { loteId, sexo, estado } = req.query
-        const animais = await animalService.listar(USUARIO_ID, {
+        const animais = await animalService.listar(req.usuarioId!, {
             loteId: loteId ? Number(loteId) : undefined,
             sexo: sexo as string,
             estado: estado as string,
@@ -21,9 +19,9 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req: AuthRequest, res) => {
     try {
-        const animal = await animalService.buscarPorId(Number(req.params.id), USUARIO_ID)
+        const animal = await animalService.buscarPorId(Number(req.params.id), req.usuarioId!)
         if (!animal) return res.status(404).json({ erro: "Animal não encontrado" })
         res.json(animal)
     } catch (error) {
@@ -31,12 +29,12 @@ router.get("/:id", async (req, res) => {
     }
 })
 
-router.post("/", async (req, res) => {
+router.post("/", async (req: AuthRequest, res) => {
     try {
         const { nome, raca, sexo, pesoInicial, loteId, dataNascimento } = req.body
         const animal = await animalService.criar({
             nome, raca, sexo, pesoInicial, loteId,
-            usuarioId: USUARIO_ID,
+            usuarioId: req.usuarioId!,
             dataNascimento: dataNascimento ? new Date(dataNascimento) : undefined
         })
         res.status(201).json(animal)
@@ -45,18 +43,18 @@ router.post("/", async (req, res) => {
     }
 })
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", async (req: AuthRequest, res) => {
     try {
-        await animalService.atualizar(Number(req.params.id), USUARIO_ID, req.body)
+        await animalService.atualizar(Number(req.params.id), req.usuarioId!, req.body)
         res.json({ mensagem: "Animal atualizado com sucesso" })
     } catch (error) {
         res.status(500).json({ erro: "Erro ao atualizar animal" })
     }
 })
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req: AuthRequest, res) => {
     try {
-        await animalService.deletar(Number(req.params.id), USUARIO_ID)
+        await animalService.deletar(Number(req.params.id), req.usuarioId!)
         res.json({ mensagem: "Animal deletado com sucesso" })
     } catch (error) {
         res.status(500).json({ erro: "Erro ao deletar animal" })

@@ -1,12 +1,11 @@
 import { Router } from "express"
 import { CustoService } from "../services/CustoService"
+import { AuthRequest } from "../middleware/auth"
 
 const router = Router()
 const custoService = new CustoService()
 
-const USUARIO_ID = 1
-
-router.post("/fornecimento", async (req, res) => {
+router.post("/fornecimento", async (req: AuthRequest, res) => {
     try {
         const { loteId, racaoId, quantidade, data, custo } = req.body
         const fornecimento = await custoService.registrarFornecimento({
@@ -20,7 +19,7 @@ router.post("/fornecimento", async (req, res) => {
     }
 })
 
-router.get("/lote/:loteId", async (req, res) => {
+router.get("/lote/:loteId", async (req: AuthRequest, res) => {
     try {
         const { dataInicio, dataFim } = req.query
         const resultado = await custoService.custoPorLote(
@@ -34,9 +33,9 @@ router.get("/lote/:loteId", async (req, res) => {
     }
 })
 
-router.get("/dashboard", async (req, res) => {
+router.get("/dashboard", async (req: AuthRequest, res) => {
     try {
-        const dados = await custoService.dashboard(USUARIO_ID)
+        const dados = await custoService.dashboard(req.usuarioId!)
         res.json(dados)
     } catch (error) {
         res.status(500).json({ erro: "Erro ao buscar dashboard" })

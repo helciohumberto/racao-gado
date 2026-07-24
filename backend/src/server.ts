@@ -1,9 +1,11 @@
 import express from "express"
 import cors from "cors"
 import "dotenv/config"
+import authRoutes from "./routes/authRoutes"
 import animaisRoutes from "./routes/animaisRoutes"
 import pesagensRoutes from "./routes/pesagensRoutes"
 import custosRoutes from "./routes/custosRoutes"
+import { autenticar } from "./middleware/auth"
 
 const app = express()
 
@@ -14,13 +16,13 @@ app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`)
     next()
 })
-app.use("/animais", animaisRoutes)
-app.use("/pesagens", pesagensRoutes)
-app.use("/custos", custosRoutes)
 
-app.get("/health", (req, res) => {
-    res.json({ status: "ok" })
-})
+app.get("/health", (req, res) => res.json({ status: "ok" }))
+
+app.use("/auth", authRoutes)
+app.use("/animais", autenticar, animaisRoutes)
+app.use("/pesagens", autenticar, pesagensRoutes)
+app.use("/custos", autenticar, custosRoutes)
 
 app.listen(3001, () => {
     console.log("racao-gado backend rodando na porta 3001")
