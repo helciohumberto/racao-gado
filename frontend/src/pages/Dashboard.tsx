@@ -98,6 +98,12 @@ function Dashboard() {
                             >
                                 Ver todos os animais →
                             </button>
+                            <button
+                                onClick={() => navigate("/relatorios")}
+                                className="mt-4 px-4 py-2 bg-gray-700 rounded hover:bg-gray-600 transition text-sm"
+                            >
+                                Relatorios →
+                            </button>
                         </div>
                     </>
                 ) : (
