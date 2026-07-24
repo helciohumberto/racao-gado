@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "build": "echo 'no build step'",
+  "start": "npx prisma migrate deploy && ts-node src/server.ts",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
   },
