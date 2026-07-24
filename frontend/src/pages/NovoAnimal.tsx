@@ -15,22 +15,23 @@ const animalSchema = z.object({
     dataNascimento: z.string().optional()
 })
 
-type AnimalForm = z.infer<typeof animalSchema>
+type AnimalFormInput = z.input<typeof animalSchema>
+type AnimalFormOutput = z.output<typeof animalSchema>
 
 function NovoAnimal() {
     const navigate = useNavigate()
     const [lotes, setLotes] = useState<Lote[]>([])
     const [salvando, setSalvando] = useState(false)
 
-    const { register, handleSubmit, formState: { errors } } = useForm<AnimalForm>({
-        resolver: zodResolver(animalSchema)
-    })
+    const { register, handleSubmit, formState: { errors } } = useForm<AnimalFormInput, any, AnimalFormOutput>({
+    resolver: zodResolver(animalSchema)
+})
 
     useEffect(() => {
         api.get("/lotes").then(r => setLotes(r.data)).catch(() => {})
     }, [])
 
-    async function onSubmit(dados: AnimalForm) {
+    async function onSubmit(dados: AnimalFormOutput ) {
         setSalvando(true)
         try {
             await api.post("/animais", dados)
