@@ -32,7 +32,7 @@ function Login() {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen gap-4 bg-gray-900">
-            <h1 className="text-3xl font-bold text-white">🐄 racao-gado</h1>
+            <h1 className="text-3xl font-bold text-white">racao-gado</h1>
             <p className="text-gray-400 text-sm">Sistema de gestão de pecuária</p>
             <div className="bg-gray-800 p-8 rounded-lg w-80 flex flex-col gap-4">
                 <input
