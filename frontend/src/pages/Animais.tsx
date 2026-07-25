@@ -43,6 +43,14 @@ function Animais() {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">🐄 Animais</h1>
           <div className="flex gap-3">
+
+           <button
+              onClick={() => navigate("/novolote")}
+              className="px-4 py-2 bg-green-600 rounded hover:bg-green-700 transition text-sm"
+            >
+              + Adicionar Lote
+            </button>
+
             <button
               onClick={() => navigate("/novoanimal")}
               className="px-4 py-2 bg-green-600 rounded hover:bg-green-700 transition text-sm"
