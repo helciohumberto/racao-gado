@@ -14,10 +14,9 @@ Quando aprendi a programar, a primeira coisa que quis construir foi uma soluçã
 
 ## 🚀 Demo ao vivo
 
-- **Frontend:** [em breve no Vercel]
-- **Backend API:** [em breve no Railway]
-- **Documentação Swagger:** [em breve]/docs
-
+- **Frontend:** [racao-gado.vercel.app](https://racao-gado.vercel.app)
+- **Backend API:** [racao-gado-production.up.railway.app](https://racao-gado-production.up.railway.app)
+- **Documentação Swagger:** [racao-gado-production.up.railway.app/docs](https://racao-gado-production.up.railway.app/docs)
 ---
 
 ## ✨ Funcionalidades
