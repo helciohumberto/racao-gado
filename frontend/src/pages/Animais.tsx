@@ -41,7 +41,7 @@ function Animais() {
     <div className="min-h-screen bg-gray-900 text-white p-8">
       <div className="max-w-5xl mx-auto">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">🐄 Animais</h1>
+          <h1 className="text-2xl font-bold">Animais</h1>
           <div className="flex gap-3">
 
            <button
